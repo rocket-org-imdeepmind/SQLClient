@@ -35,7 +35,7 @@ declare class SqlClient {
      * @param page - Page number for pagination (default: 1)
      * @returns - Array of rows as query results
      */
-    executeDQL<T>(query: string, params?: unknown[], many?: boolean, limit?: number, page?: number): Promise<T[] | T>;
+    executeDQL<T>(query: string, params?: unknown[], many?: boolean, limit?: number, page?: number): Promise<T[] | T | null>;
     /**
      * DML - Executes a Data Manipulation Language statement
      * @param query - The SQL query string for DML operations

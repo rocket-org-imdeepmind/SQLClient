@@ -79,10 +79,15 @@ var SqlClient = class {
         const offset = (page - 1) * limit;
         query = `${query} LIMIT $${params.length + 1} OFFSET $${params.length + 2}`;
         params.push(limit, offset);
+        const result2 = await client.query(query, params);
+        this.logger.info("DQL query executed successfully.");
+        return result2.rows;
       }
       const result = await client.query(query, params);
-      this.logger.info("DQL query executed successfully.");
-      return result.rows;
+      if (result.rows.length > 0) {
+        return result.rows[0];
+      }
+      return null;
     } catch (error) {
       this.logger.error("Error executing DQL query:", error);
       throw error;
